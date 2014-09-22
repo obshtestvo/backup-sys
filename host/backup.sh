@@ -1,4 +1,4 @@
-#!/bin/sh 
+#!/bin/bash 
 
 name=backup
 key=FDA82047
@@ -42,8 +42,8 @@ for fl in *; do
 	gpg --no-tty --homedir=/root/.gnupg -q --encrypt -r $key -o $bd/${cont}_${fl}.gpg $fl 2>/dev/null >/dev/null
 done
 
-cd $bd 
+cd $bd || exit 3 
 
-#tar cf - *gpg
-#rm *
+tar cf - *gpg
+rm -f *
 rm -f /var/run/$name.pid
