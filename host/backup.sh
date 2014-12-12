@@ -24,7 +24,7 @@ rm -f $bd/*
 cd /var/lib/lxc || exit 3
 for cont in *; do
 	( 
-		ssh -T -i /root/.ssh/backup_key_rsa root@$cont.cont 2>/dev/null
+		ssh -o StrictHostKeyChecking=no -T -i /root/.ssh/backup_key_rsa root@$cont.cont 2>/dev/null
 		if [ ! -d $cont/rootfs/backup ]; then
 			continue
 		fi
