@@ -23,9 +23,15 @@ gets copied from the host, which contains what's needed.
 
 ## How to modify what's being backed up
 
+**DO NOT MODIFY** the `/do_backup.sh` script directly in the container except
+for test purposes. Otherwise it will be overwritten at some point with the
+version found in this repo.
+
 In this repository, in `cont/` create a directory with the name of the
 container, put there a modified `do_backup.sh` and when done run `make` from
-the top level directory of this repository, to install it.
+the top level directory of this repository, to install it. A clone of this repo
+can be found in `/root/backup-sys` on `koi.obshtestvo.bg`. Do not forget to do
+a `git pull` before running `make`.
 
 If you have a hard time understanding the script, **DO NOT TOUCH IT** and ask
 someone else.
