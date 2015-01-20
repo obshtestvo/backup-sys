@@ -1,18 +1,18 @@
-# Backup Configuration for Obshtestvo.bg Infrastructure #
+# Backup Configuration for Obshtestvo.bg Infrastructure
 
-## Contents ##
+## Contents
+
  * `Makefile` updates the scripts
  * `host/`
    * `do_backup.sh` - does backup for the host
    * `backup.sh` - collects backups for the containers
  * `cont/$CONTAINER` the backup script for each container
 
-## Backup storage/strategy.
+## Backup storage/strategy
 
 On **marla.ludost.net**, the backup is initiated *every morning at 6:06am* and
 is kept for *one week*. All backups are full backups, no incremental or
 differential ones.
-
 
 ## How to add a container to be backed up
 
@@ -48,7 +48,7 @@ backup, ask Vasil Kolev for the encrypted files.
 unencrypted files, or `/backup` on the host
 * Take the needed archives/files and restore what you need
 
-## How Does It Work ##
+## How Does It Work
 
 ### Backup initiation, stage 1
 
@@ -62,12 +62,12 @@ them in tar format to stdout. This is described in `/root/.ssh/authorized_keys`.
 This script triggers the backup creation using ssh in all containers it
 finds, calling `/do_backup.sh` over ssh. For this to work for the container, in
 it in `/root/.ssh/authrorized_keys` there should be a line that allows calling
-`/do_backup.sh` using the backup key (which can be located on 
+`/do_backup.sh` using the backup key (which can be located on
 **koi.obshtestvo.bg** in `/root/.ssh/`).
 
 All `do_backup.sh` scripts create a `/backup` directory in the container, which
 then gets encrypted using gpg with a key that can be found in `/root/gnupg`:
- 
+
 ```
 pub   4096R/FDA82047 2014-09-22
 uid                  Obshtestvo Backup <root@koi.obshtestvo.bg>
@@ -86,6 +86,3 @@ starting with `command="/do_backup.sh",no-pty,no-port-forwarding,no-X11-forwardi
 files should be available in `/etc/mysql/debian.cnf`.
 * If pgsql databases are available in the container, the database has to run
 as the postgres user and sudo must be available.
-
-
-
